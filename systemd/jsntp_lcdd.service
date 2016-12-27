@@ -1,0 +1,13 @@
+[Unit]
+Description=JsNTP LCD Daemon
+After=ntp.service
+
+[Service]
+Type=forking
+PIDFile=/var/run/jsntp_lcdd.pid
+ExecStart=/usr/local/bin/jsntp_lcdd -D --pidfile=/var/run/jsntp_lcdd.pid --user=jsntpd
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
